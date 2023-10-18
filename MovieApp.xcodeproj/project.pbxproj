@@ -14,6 +14,7 @@
 		41D7C7AC2ADFC810003CC771 /* MovieAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7C7AB2ADFC810003CC771 /* MovieAppTests.swift */; };
 		41D7C7B62ADFC810003CC771 /* MovieAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7C7B52ADFC810003CC771 /* MovieAppUITests.swift */; };
 		41D7C7B82ADFC810003CC771 /* MovieAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7C7B72ADFC810003CC771 /* MovieAppUITestsLaunchTests.swift */; };
+		41D7C7C72ADFCC9C003CC771 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 41D7C7C62ADFCC9C003CC771 /* Core */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		41D7C7B12ADFC810003CC771 /* MovieAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41D7C7B52ADFC810003CC771 /* MovieAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppUITests.swift; sourceTree = "<group>"; };
 		41D7C7B72ADFC810003CC771 /* MovieAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		41D7C7C42ADFC993003CC771 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Core; path = ../Core; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41D7C7C72ADFCC9C003CC771 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,10 +77,12 @@
 		41D7C78E2ADFC80D003CC771 = {
 			isa = PBXGroup;
 			children = (
+				41D7C7C42ADFC993003CC771 /* Core */,
 				41D7C7992ADFC80D003CC771 /* MovieApp */,
 				41D7C7AA2ADFC810003CC771 /* MovieAppTests */,
 				41D7C7B42ADFC810003CC771 /* MovieAppUITests */,
 				41D7C7982ADFC80D003CC771 /* Products */,
+				41D7C7C52ADFCC9C003CC771 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +132,13 @@
 			path = MovieAppUITests;
 			sourceTree = "<group>";
 		};
+		41D7C7C52ADFCC9C003CC771 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +155,9 @@
 			dependencies = (
 			);
 			name = MovieApp;
+			packageProductDependencies = (
+				41D7C7C62ADFCC9C003CC771 /* Core */,
+			);
 			productName = MovieApp;
 			productReference = 41D7C7972ADFC80D003CC771 /* MovieApp.app */;
 			productType = "com.apple.product-type.application";
@@ -345,7 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -399,7 +414,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -577,6 +592,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		41D7C7C62ADFCC9C003CC771 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 41D7C78F2ADFC80D003CC771 /* Project object */;
 }
