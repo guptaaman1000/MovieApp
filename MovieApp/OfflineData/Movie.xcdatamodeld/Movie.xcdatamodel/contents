@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CDGenre" representedClassName=".CDGenre" syncable="YES" codeGenerationType="category">
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CDLanguage" representedClassName=".CDLanguage" syncable="YES" codeGenerationType="category">
+        <attribute name="isoCode" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CDMovieDetail" representedClassName=".CDMovieDetail" syncable="YES" codeGenerationType="category">
+        <attribute name="budget" optional="YES" attributeType="Integer 32" usesScalarValueType="YES"/>
+        <attribute name="fullPath" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isFavourite" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="releaseDate" optional="YES" attributeType="String"/>
+        <attribute name="revenue" optional="YES" attributeType="Integer 32" usesScalarValueType="YES"/>
+        <attribute name="runtime" optional="YES" attributeType="Integer 32" usesScalarValueType="YES"/>
+        <attribute name="thumbPath" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="voteAverage" optional="YES" attributeType="Float" usesScalarValueType="YES"/>
+        <relationship name="genres" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDGenre"/>
+        <relationship name="spokenLanguages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDLanguage"/>
+    </entity>
+    <elements>
+        <element name="CDGenre" positionX="-54" positionY="54" width="128" height="59"/>
+        <element name="CDLanguage" positionX="-36" positionY="63" width="128" height="59"/>
+        <element name="CDMovieDetail" positionX="-63" positionY="-18" width="128" height="224"/>
+    </elements>
+</model>
