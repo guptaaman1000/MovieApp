@@ -2,14 +2,13 @@
 //  MovieMetaData.swift
 //  MovieApp
 //
-//  Created by Aman Gupta on 28/07/21.
-//  Copyright © 2021 Aman Gupta. All rights reserved.
+//  Created by Aman Gupta on 18/10/23.
 //
 
 import Foundation
 import Core
 
-struct MovieMetaData: Decodable {
+struct MovieMetaData: Decodable, Identifiable, Equatable {
     
     let posterPath: String?
     let id: Int

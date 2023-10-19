@@ -2,8 +2,7 @@
 //  CDLanguage.swift
 //  MovieApp
 //
-//  Created by Aman Gupta on 28/07/21.
-//  Copyright © 2021 Aman Gupta. All rights reserved.
+//  Created by Aman Gupta on 17/10/23.
 //
 
 import Foundation
