@@ -8,6 +8,7 @@
 import SwiftyMocky
 import XCTest
 import Combine
+import Core
 @testable import MovieApp
 
 
