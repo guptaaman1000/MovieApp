@@ -1,0 +1,12 @@
+sources:
+  include:
+  - ./MovieApp
+templates:
+  - ./Pods/SwiftyMocky/Sources/SwiftyMocky
+output:
+  ./MovieAppTests/Mocks
+args:
+  testable:
+    - MovieApp
+  import:
+    - Combine
