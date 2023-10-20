@@ -15,7 +15,8 @@ This project is build using Swift 5.
 
 ## 5. 3rd Party Libraries
 CocoaPods:
-- Sourcery, SwiftyMocky - Generate mock classes for test cases.
+- Sourcery, SwiftyMocky - Generate mock classes for test cases. 
+
 Swift Packages:
 - CachedAsyncImage - To download images from server and caching them
 - Swinject - Dependency Injection
