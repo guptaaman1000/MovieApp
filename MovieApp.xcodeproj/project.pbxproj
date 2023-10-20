@@ -53,6 +53,8 @@
 		41D7C7E02ADFD31D003CC771 /* MovieOfflineInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7C7DD2ADFD31D003CC771 /* MovieOfflineInteractor.swift */; };
 		41D7C7E12ADFD31D003CC771 /* MovieNetworkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7C7DE2ADFD31D003CC771 /* MovieNetworkInteractor.swift */; };
 		41D7C7E42AE00820003CC771 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 41D7C7E32AE00820003CC771 /* Swinject */; };
+		41F3266C2AE2D5ED00E63876 /* SharedComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 41F3266B2AE2D5ED00E63876 /* SharedComponents */; };
+		41F3266F2AE2D60400E63876 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 41F3266E2AE2D60400E63876 /* Core */; };
 		B6A639535402744ACBD83E32 /* Pods_MovieApp_MovieAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B4F244A441F9863BA9DD3A5 /* Pods_MovieApp_MovieAppUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +140,8 @@
 				4110425F2AE1C9FD009811B3 /* ExampleCachedAsyncImage in Frameworks */,
 				41D7C7C72ADFCC9C003CC771 /* Core in Frameworks */,
 				41D7C7E42AE00820003CC771 /* Swinject in Frameworks */,
+				41F3266F2AE2D60400E63876 /* Core in Frameworks */,
+				41F3266C2AE2D5ED00E63876 /* SharedComponents in Frameworks */,
 				05533C7C9FAE73CA213F2F8B /* Pods_MovieApp.framework in Frameworks */,
 				411042932AE2ADC3009811B3 /* iOSSnapshotTestCase in Frameworks */,
 			);
@@ -404,6 +408,8 @@
 				4110425C2AE1C9FD009811B3 /* CachedAsyncImage */,
 				4110425E2AE1C9FD009811B3 /* ExampleCachedAsyncImage */,
 				411042922AE2ADC3009811B3 /* iOSSnapshotTestCase */,
+				41F3266B2AE2D5ED00E63876 /* SharedComponents */,
+				41F3266E2AE2D60400E63876 /* Core */,
 			);
 			productName = MovieApp;
 			productReference = 41D7C7972ADFC80D003CC771 /* MovieApp.app */;
@@ -485,6 +491,8 @@
 				41D7C7E22AE00820003CC771 /* XCRemoteSwiftPackageReference "Swinject" */,
 				4110425B2AE1C9FD009811B3 /* XCRemoteSwiftPackageReference "CachedAsyncImage" */,
 				411042912AE2ADC3009811B3 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */,
+				41F3266A2AE2D5ED00E63876 /* XCRemoteSwiftPackageReference "SharedComponents" */,
+				41F3266D2AE2D60400E63876 /* XCRemoteSwiftPackageReference "Core" */,
 			);
 			productRefGroup = 41D7C7982ADFC80D003CC771 /* Products */;
 			projectDirPath = "";
@@ -1018,6 +1026,22 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		41F3266A2AE2D5ED00E63876 /* XCRemoteSwiftPackageReference "SharedComponents" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/guptaaman1000/SharedComponents";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		41F3266D2AE2D60400E63876 /* XCRemoteSwiftPackageReference "Core" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/guptaaman1000/Core";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1048,6 +1072,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 41D7C7E22AE00820003CC771 /* XCRemoteSwiftPackageReference "Swinject" */;
 			productName = Swinject;
+		};
+		41F3266B2AE2D5ED00E63876 /* SharedComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41F3266A2AE2D5ED00E63876 /* XCRemoteSwiftPackageReference "SharedComponents" */;
+			productName = SharedComponents;
+		};
+		41F3266E2AE2D60400E63876 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41F3266D2AE2D60400E63876 /* XCRemoteSwiftPackageReference "Core" */;
+			productName = Core;
 		};
 /* End XCSwiftPackageProductDependency section */
 
