@@ -34,7 +34,7 @@ class MovieListViewModelTest: XCTestCase {
     func testFetchMovieList_success() throws {
         
         // Given
-        let mockResponse = try XCTUnwrap(getMovieListResponseFromJson())
+        let mockResponse: MovieListResponse = try XCTUnwrap(getDataFromJson())
         let returnValue = Just(mockResponse)
             .setFailureType(to: NetworkError.self)
             .eraseToAnyPublisher()
@@ -67,18 +67,5 @@ class MovieListViewModelTest: XCTestCase {
         // Then
         XCTAssertTrue(model.dataSource.isEmpty)
         XCTAssertEqual(model.dataSource.count, 0)
-    }
-        
-    private  func getMovieListResponseFromJson() -> MovieListResponse? {
-        var response: MovieListResponse?
-        if let file = Bundle(for: MovieListViewModelTest.self).url(forResource: "MovieListResponse", withExtension: "json") {
-            do {
-                let jsonData = try Data(contentsOf: file)
-                response = try JSONDecoder().decode(MovieListResponse.self, from: jsonData)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        return response
-    }    
+    }        
 }

@@ -13,7 +13,7 @@ class MovieDetailTest: XCTestCase {
     func testMovieDetail_initDecoder() throws {
         
         // Given
-        let result = try XCTUnwrap(getMovieDetailFromJson())
+        let result: MovieDetail = try XCTUnwrap(getDataFromJson())
         
         // Then
         XCTAssertEqual(result.id, 550)
@@ -68,18 +68,5 @@ class MovieDetailTest: XCTestCase {
         // Then
         XCTAssertEqual(result.isoCode, "en_US")
         XCTAssertEqual(result.name, "English")
-    }
-
-    private  func getMovieDetailFromJson() -> MovieDetail? {
-        var response: MovieDetail?
-        if let file = Bundle(for: MovieListViewModelTest.self).url(forResource: "MovieDetail", withExtension: "json") {
-            do {
-                let jsonData = try Data(contentsOf: file)
-                response = try JSONDecoder().decode(MovieDetail.self, from: jsonData)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        return response
     }
 }

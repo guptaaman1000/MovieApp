@@ -13,7 +13,7 @@ class MovieListResponseTest: XCTestCase {
     func testMovieListResponse_initDecoder() throws {
         
         // Given
-        let result = try XCTUnwrap(getMovieListResponseFromJson())
+        let result: MovieListResponse = try XCTUnwrap(getDataFromJson())
         
         // Then
         XCTAssertEqual(result.movieList.count, 20)
@@ -25,7 +25,7 @@ class MovieListResponseTest: XCTestCase {
     func testMovieListResponse_initMetaData() throws {
         
         // Given
-        let metaData = [try XCTUnwrap(getMovieMetaDataFromJson())]
+        let metaData: [MovieMetaData] = [try XCTUnwrap(getDataFromJson())]
 
         // When
         let result = MovieListResponse(movieList: metaData)
@@ -35,31 +35,5 @@ class MovieListResponseTest: XCTestCase {
         XCTAssertEqual(result.page, 1)
         XCTAssertEqual(result.totalPages, 1)
         XCTAssertEqual(result.totalResults, 1)
-    }
-    
-    private  func getMovieListResponseFromJson() -> MovieListResponse? {
-        var response: MovieListResponse?
-        if let file = Bundle(for: MovieListViewModelTest.self).url(forResource: "MovieListResponse", withExtension: "json") {
-            do {
-                let jsonData = try Data(contentsOf: file)
-                response = try JSONDecoder().decode(MovieListResponse.self, from: jsonData)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        return response
-    }
-    
-    private  func getMovieMetaDataFromJson() -> MovieMetaData? {
-        var response: MovieMetaData?
-        if let file = Bundle(for: MovieListViewModelTest.self).url(forResource: "MovieMetaData", withExtension: "json") {
-            do {
-                let jsonData = try Data(contentsOf: file)
-                response = try JSONDecoder().decode(MovieMetaData.self, from: jsonData)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        return response
     }
 }

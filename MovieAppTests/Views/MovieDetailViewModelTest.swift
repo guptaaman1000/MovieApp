@@ -19,7 +19,7 @@ class MovieDetailViewModelTest: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         interactor = MovieInteractorTypeMock()
-        let mockResponse = try XCTUnwrap(getMovieMetaDataFromJson())
+        let mockResponse: MovieMetaData = try XCTUnwrap(getDataFromJson())
         model = MovieDetailViewModel(movieInteractor: interactor, metaData: mockResponse)
     }
     
@@ -32,7 +32,7 @@ class MovieDetailViewModelTest: XCTestCase {
     func testFetchMovieDetail_success() throws {
         
         // Given
-        let mockResponse = try XCTUnwrap(getMovieDetailFromJson())
+        let mockResponse: MovieDetail = try XCTUnwrap(getDataFromJson())
         let returnValue = Just(mockResponse)
             .setFailureType(to: NetworkError.self)
             .eraseToAnyPublisher()
@@ -69,7 +69,7 @@ class MovieDetailViewModelTest: XCTestCase {
     func testHandleFavourite() throws {
         
         // Given
-        model.dataSource = getMovieDetailFromJson()
+        model.dataSource = getDataFromJson()
         XCTAssertFalse(model.dataSource?.isFavourite ?? false)
         
         // When
@@ -77,31 +77,5 @@ class MovieDetailViewModelTest: XCTestCase {
         
         // Then
         XCTAssertTrue(model.dataSource?.isFavourite ?? false)
-    }
-    
-    private  func getMovieDetailFromJson() -> MovieDetail? {
-        var response: MovieDetail?
-        if let file = Bundle(for: MovieListViewModelTest.self).url(forResource: "MovieDetail", withExtension: "json") {
-            do {
-                let jsonData = try Data(contentsOf: file)
-                response = try JSONDecoder().decode(MovieDetail.self, from: jsonData)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        return response
-    }
-    
-    private  func getMovieMetaDataFromJson() -> MovieMetaData? {
-        var response: MovieMetaData?
-        if let file = Bundle(for: MovieListViewModelTest.self).url(forResource: "MovieMetaData", withExtension: "json") {
-            do {
-                let jsonData = try Data(contentsOf: file)
-                response = try JSONDecoder().decode(MovieMetaData.self, from: jsonData)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        return response
     }
 }
