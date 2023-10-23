@@ -10,31 +10,36 @@ import XCTest
 
 class MovieMetaDataTest: XCTestCase {
     
-    func testMovieMetaData_initDecoder() throws {
+    func testMovieMetaData_initDecoder() {
         
-        // Given
-        let result: MovieMetaData = try XCTUnwrap(getDataFromJson())
-        
-        // Then
-        XCTAssertEqual(result.posterPath, "https://image.tmdb.org/t/p/w200/7PzJdsLGlR7oW4J0J5Xcd0pHGRg.png")
-        XCTAssertEqual(result.id, 508)
-        XCTAssertEqual(result.title, "Regency Enterprises")
-        XCTAssertEqual(result.voteAverage, 7.5)
+        given {
+            let result: MovieMetaData = try XCTUnwrap(getDataFromJson())
+            
+            then {
+                XCTAssertEqual(result.posterPath, "https://image.tmdb.org/t/p/w200/7PzJdsLGlR7oW4J0J5Xcd0pHGRg.png")
+                XCTAssertEqual(result.id, 508)
+                XCTAssertEqual(result.title, "Regency Enterprises")
+                XCTAssertEqual(result.voteAverage, 7.5)
+            }
+        }
     }
     
     func testMovieMetaData_initDetail() {
         
-        // Given
-        let context = CoreDataManager.shared.newChildContext()
-        let cdMovie = CDMovieDetail(context: context)
-        cdMovie.id = 100
-        cdMovie.title = "Mission Impossible"
-        
-        // When
-        let result = MovieMetaData(detail: cdMovie)
-        
-        // Then
-        XCTAssertEqual(result.id, 100)
-        XCTAssertEqual(result.title, "Mission Impossible")
+        given {
+            let context = CoreDataManager.shared.newChildContext()
+            let cdMovie = CDMovieDetail(context: context)
+            cdMovie.id = 100
+            cdMovie.title = "Mission Impossible"
+            
+            when {
+                let result = MovieMetaData(detail: cdMovie)
+                
+                then {
+                    XCTAssertEqual(result.id, 100)
+                    XCTAssertEqual(result.title, "Mission Impossible")
+                }
+            }
+        }
     }
 }

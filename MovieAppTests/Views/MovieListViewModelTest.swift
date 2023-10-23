@@ -31,41 +31,47 @@ class MovieListViewModelTest: XCTestCase {
         super.tearDown()
     }
     
-    func testFetchMovieList_success() throws {
+    func testFetchMovieList_success() {
         
-        // Given
-        let mockResponse: MovieListResponse = try XCTUnwrap(getDataFromJson())
-        let returnValue = Just(mockResponse)
-            .setFailureType(to: NetworkError.self)
-            .eraseToAnyPublisher()
-        interactor.given(.getMovieList(page: .any, willReturn: returnValue))
-               
-        // When
-        let exp = expectation(description: "Loading movies")
-        exp.isInverted = true
-        model.fetchMovies()
-        waitForExpectations(timeout: 0.5)
-        
-        // Then
-        XCTAssertFalse(model.dataSource.isEmpty)
-        XCTAssertEqual(model.dataSource.count, 20)
+        given {
+            let mockResponse: MovieListResponse = try XCTUnwrap(getDataFromJson())
+            let returnValue = Just(mockResponse)
+                .setFailureType(to: NetworkError.self)
+                .eraseToAnyPublisher()
+            interactor.given(.getMovieList(page: .any, willReturn: returnValue))
+            
+            when {
+                let exp = expectation(description: "Loading movies")
+                exp.isInverted = true
+                model.fetchMovies()
+                waitForExpectations(timeout: 0.5)
+                
+                then {
+                    XCTAssertFalse(model.dataSource.isEmpty)
+                    XCTAssertEqual(model.dataSource.count, 20)
+                }
+            }
+        }
     }
     
     func testFetchMovieList_failure() {
         
-        // Given
-        let returnValue = Fail<MovieListResponse, NetworkError>(error: NetworkError.noContent)
-            .eraseToAnyPublisher()
-        interactor.given(.getMovieList(page: .any, willReturn: returnValue))
-
-        // When
-        let exp = expectation(description: "Loading movies")
-        exp.isInverted = true
-        model.fetchMovies()
-        waitForExpectations(timeout: 0.5)
-
-        // Then
-        XCTAssertTrue(model.dataSource.isEmpty)
-        XCTAssertEqual(model.dataSource.count, 0)
-    }        
+        given {
+            let returnValue = Fail<MovieListResponse, NetworkError>(error: NetworkError.noContent)
+                .eraseToAnyPublisher()
+            interactor.given(.getMovieList(page: .any, willReturn: returnValue))
+            
+            when {
+                let exp = expectation(description: "Loading movies")
+                exp.isInverted = true
+                model.fetchMovies()
+                waitForExpectations(timeout: 0.5)
+                
+                then {
+                    XCTAssertTrue(model.dataSource.isEmpty)
+                    XCTAssertEqual(model.dataSource.count, 0)
+                }
+            }
+        }
+    }
 }

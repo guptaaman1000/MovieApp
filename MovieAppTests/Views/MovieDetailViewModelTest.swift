@@ -29,53 +29,62 @@ class MovieDetailViewModelTest: XCTestCase {
         super.tearDown()
     }
     
-    func testFetchMovieDetail_success() throws {
+    func testFetchMovieDetail_success() {
         
-        // Given
-        let mockResponse: MovieDetail = try XCTUnwrap(getDataFromJson())
-        let returnValue = Just(mockResponse)
-            .setFailureType(to: NetworkError.self)
-            .eraseToAnyPublisher()
-        interactor.given(.getMovieDetail(id: .any, willReturn: returnValue))
-        
-        // When
-        let exp = expectation(description: "Loading movie details")
-        exp.isInverted = true
-        model.fetchMovieDetail()
-        waitForExpectations(timeout: 0.5)
-        
-        // Then
-        let result = try XCTUnwrap(model.dataSource)
-        XCTAssertEqual(result.id, 550)
+        given {
+            let mockResponse: MovieDetail = try XCTUnwrap(getDataFromJson())
+            let returnValue = Just(mockResponse)
+                .setFailureType(to: NetworkError.self)
+                .eraseToAnyPublisher()
+            interactor.given(.getMovieDetail(id: .any, willReturn: returnValue))
+            
+            when {
+                let exp = expectation(description: "Loading movie details")
+                exp.isInverted = true
+                model.fetchMovieDetail()
+                waitForExpectations(timeout: 0.5)
+                
+                then {
+                    let result = try XCTUnwrap(model.dataSource)
+                    XCTAssertEqual(result.id, 550)
+                }
+            }
+        }
     }
     
     func testFetchMovieDetail_failure() {
         
-        // Given
-        let returnValue = Fail<MovieDetail, NetworkError>(error: NetworkError.noContent)
-            .eraseToAnyPublisher()
-        interactor.given(.getMovieDetail(id: .any, willReturn: returnValue))
-        
-        // When
-        let exp = expectation(description: "Loading movie details")
-        exp.isInverted = true
-        model.fetchMovieDetail()
-        waitForExpectations(timeout: 0.5)
-
-        // Then
-        XCTAssertNil(model.dataSource)
+        given {
+            let returnValue = Fail<MovieDetail, NetworkError>(error: NetworkError.noContent)
+                .eraseToAnyPublisher()
+            interactor.given(.getMovieDetail(id: .any, willReturn: returnValue))
+            
+            when {
+                let exp = expectation(description: "Loading movie details")
+                exp.isInverted = true
+                model.fetchMovieDetail()
+                waitForExpectations(timeout: 0.5)
+                
+                then {
+                    XCTAssertNil(model.dataSource)
+                }
+            }
+        }
     }
     
-    func testHandleFavourite() throws {
+    func testHandleFavourite() {
         
-        // Given
-        model.dataSource = getDataFromJson()
-        XCTAssertFalse(model.dataSource?.isFavourite ?? false)
-        
-        // When
-        model.handleFavourite()
-        
-        // Then
-        XCTAssertTrue(model.dataSource?.isFavourite ?? false)
+        given {
+            model.dataSource = getDataFromJson()
+            XCTAssertFalse(model.dataSource?.isFavourite ?? false)
+            
+            when {
+                model.handleFavourite()
+                
+                then {
+                    XCTAssertTrue(model.dataSource?.isFavourite ?? false)
+                }
+            }
+        }
     }
 }

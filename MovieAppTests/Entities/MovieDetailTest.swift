@@ -10,63 +10,74 @@ import XCTest
 
 class MovieDetailTest: XCTestCase {
     
-    func testMovieDetail_initDecoder() throws {
+    func testMovieDetail_initDecoder() {
         
-        // Given
-        let result: MovieDetail = try XCTUnwrap(getDataFromJson())
-        
-        // Then
-        XCTAssertEqual(result.id, 550)
-        XCTAssertEqual(result.title, "Fight Club")
-        XCTAssertEqual(result.genres?.count, 1)
-        XCTAssertEqual(result.spokenLanguages?.count, 1)
+        given {
+            let result: MovieDetail = try XCTUnwrap(getDataFromJson())
+            
+            then {
+                XCTAssertEqual(result.id, 550)
+                XCTAssertEqual(result.title, "Fight Club")
+                XCTAssertEqual(result.genres?.count, 1)
+                XCTAssertEqual(result.spokenLanguages?.count, 1)
+            }
+        }
     }
     
     func testMovieDetail_initDetail() {
+        
+        given {
+            let context = CoreDataManager.shared.newChildContext()
+            let cdMovie = CDMovieDetail(context: context)
+            cdMovie.id = 100
+            cdMovie.title = "Mission Impossible"
+            
+            when {
+                let result = MovieDetail(detail: cdMovie)
                 
-        // Given
-        let context = CoreDataManager.shared.newChildContext()
-        let cdMovie = CDMovieDetail(context: context)
-        cdMovie.id = 100
-        cdMovie.title = "Mission Impossible"
-        
-        // When
-        let result = MovieDetail(detail: cdMovie)
-        
-        // Then
-        XCTAssertEqual(result.id, 100)
-        XCTAssertEqual(result.title, "Mission Impossible")
+                then {
+                    XCTAssertEqual(result.id, 100)
+                    XCTAssertEqual(result.title, "Mission Impossible")
+                }
+            }
+        }
     }
-
+    
     func testGenre_initDetail() {
         
-        // Given
-        let context = CoreDataManager.shared.newChildContext()
-        let cdGenre = CDGenre(context: context)
-        cdGenre.id = 200
-        cdGenre.name = "Comedy"
-        
-        // When
-        let result = Genre(detail: cdGenre)
-        
-        // Then
-        XCTAssertEqual(result.id, 200)
-        XCTAssertEqual(result.name, "Comedy")
+        given {
+            let context = CoreDataManager.shared.newChildContext()
+            let cdGenre = CDGenre(context: context)
+            cdGenre.id = 200
+            cdGenre.name = "Comedy"
+            
+            when {
+                let result = Genre(detail: cdGenre)
+                
+                then {
+                    XCTAssertEqual(result.id, 200)
+                    XCTAssertEqual(result.name, "Comedy")
+                }
+            }
+        }
     }
     
     func testLanguage_initDetail() {
         
-        // Given
-        let context = CoreDataManager.shared.newChildContext()
-        let cdLanguage = CDLanguage(context: context)
-        cdLanguage.isoCode = "en_US"
-        cdLanguage.name = "English"
-        
-        // When
-        let result = Language(detail: cdLanguage)
-        
-        // Then
-        XCTAssertEqual(result.isoCode, "en_US")
-        XCTAssertEqual(result.name, "English")
+        given {
+            let context = CoreDataManager.shared.newChildContext()
+            let cdLanguage = CDLanguage(context: context)
+            cdLanguage.isoCode = "en_US"
+            cdLanguage.name = "English"
+            
+            when {
+                let result = Language(detail: cdLanguage)
+                
+                then {
+                    XCTAssertEqual(result.isoCode, "en_US")
+                    XCTAssertEqual(result.name, "English")
+                }
+            }
+        }
     }
 }
