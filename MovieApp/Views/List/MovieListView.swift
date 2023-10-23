@@ -53,8 +53,9 @@ struct MovieListView: View {
     }
 }
 
-//struct MovieListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MovieListView()
-//    }
-//}
+struct MovieListView_Previews: PreviewProvider {
+    static var previews: some View {
+        let model = Application.shared.assembler.resolver.resolve(MovieListViewModel.self, argument: MovieType.online)!
+        MovieListView(viewModel: model)
+    }
+}

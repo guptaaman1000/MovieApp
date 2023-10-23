@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CachedAsyncImage
+import Core
 
 struct MovieItemView: View {
     
@@ -50,8 +51,17 @@ struct MovieItemView: View {
     }
 }
 
-//struct MovieItemView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MovieItemView()
-//    }
-//}
+struct MovieItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        let context = CoreDataManager.shared.newChildContext()
+        let cdMovie = CDMovieDetail(context: context)
+        cdMovie.id = 968051
+        cdMovie.title = "The Nun II"
+        cdMovie.voteAverage = 6.98899984
+        cdMovie.thumbPath = "\(BaseUrlType.imageUrl.rawValue)/w200/5gzzkR7y3hnY8AD1wXjCnVlHba5.jpg"
+        let metaData = MovieMetaData(detail: cdMovie)
+        return MovieItemView(item: metaData)
+            .background(Color.black)
+            .frame(width: 130, height: 220)
+    }
+}
