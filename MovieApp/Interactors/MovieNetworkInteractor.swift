@@ -24,14 +24,8 @@ class MovieNetworkInteractor: MovieInteractorType {
     }
     
     func getMovieDetail(id: Int) -> AnyPublisher<MovieDetail, NetworkError> {
-        
         let path = "movie/\(id)"
         let request = Request(method: .get, path: path, params: [])
-
-        return network.request(request).map { (response: MovieDetail) -> MovieDetail in
-            var finalResponse = response
-            finalResponse.isFavourite = CDMovieDetail.getDetail(id: response.id) != nil
-            return finalResponse
-        }.eraseToAnyPublisher()
+        return network.request(request)
     }
 }

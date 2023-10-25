@@ -24,3 +24,5 @@ class CDLanguage: NSManagedObject {
         return languageSet
     }
 }
+
+extension CDLanguage: LanguageType { }

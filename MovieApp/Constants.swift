@@ -11,3 +11,8 @@ enum MovieType {
     case online
     case offline
 }
+
+enum OfflineStorageType {
+    case coreData
+    case swiftData
+}

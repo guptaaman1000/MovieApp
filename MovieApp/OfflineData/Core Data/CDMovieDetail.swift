@@ -72,9 +72,20 @@ class CDMovieDetail: NSManagedObject {
         cdMovie.isFavourite = detail.isFavourite
         cdMovie.fullPath = detail.posterPath
         cdMovie.thumbPath = metaData.posterPath
-        cdMovie.genres = CDGenre.create(genres: detail.genres, context: context)
-        cdMovie.spokenLanguages = CDLanguage.create(languages: detail.spokenLanguages, context: context)
+        cdMovie.genresSet = CDGenre.create(genres: detail.genres, context: context)
+        cdMovie.spokenLanguagesSet = CDLanguage.create(languages: detail.spokenLanguages, context: context)
 
         CoreDataManager.shared.save(context: context)
+    }
+}
+
+extension CDMovieDetail: MovieDetailType {
+    
+    var genres: [CDGenre]? {
+        genresSet?.allObjects as? [CDGenre]
+    }
+    
+    var spokenLanguages: [CDLanguage]? {
+        spokenLanguagesSet?.allObjects as? [CDLanguage]
     }
 }

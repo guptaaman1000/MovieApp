@@ -11,13 +11,15 @@ import Combine
 @Observable class MovieDetailViewModel {
     
     private let movieInteractor: MovieInteractorType
+    private let favouriteInteractor: FavouriteInteractorType
     private let metaData: MovieMetaData
     private var subscription: AnyCancellable?
     
     var dataSource: MovieDetail?
     
-    init(movieInteractor: MovieInteractorType, metaData: MovieMetaData) {
+    init(movieInteractor: MovieInteractorType, favouriteInteractor: FavouriteInteractorType, metaData: MovieMetaData) {
         self.movieInteractor = movieInteractor
+        self.favouriteInteractor = favouriteInteractor
         self.metaData = metaData
     }
     
@@ -29,7 +31,7 @@ import Combine
             
         } receiveValue: { [weak self] response in
             guard let self = self else { return }
-            self.dataSource = response
+            self.dataSource = favouriteInteractor.updateFavourite(detail: response)
         }
     }
 
@@ -37,7 +39,7 @@ import Combine
         if var detail = dataSource {
             detail.isFavourite.toggle()
             dataSource = detail
-            movieInteractor.handleFavourite(detail: detail, metaData: metaData)
+            favouriteInteractor.handleFavourite(detail: detail, metaData: metaData)
         }
     }
 }

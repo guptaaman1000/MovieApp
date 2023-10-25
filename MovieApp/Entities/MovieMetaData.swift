@@ -38,7 +38,7 @@ struct MovieMetaData: Decodable, Identifiable, Equatable {
         voteAverage = try? values.decode(Float.self, forKey: .voteAverage)
     }
 
-    init(detail: CDMovieDetail) {
+    init(detail: any MovieDetailType) {
         self.id = Int(detail.id)
         self.title = detail.title
         self.voteAverage = detail.voteAverage

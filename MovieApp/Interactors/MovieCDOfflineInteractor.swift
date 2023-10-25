@@ -1,5 +1,5 @@
 //
-//  MovieOfflineInteractor.swift
+//  MovieCDOfflineInteractor.swift
 //  MovieApp
 //
 //  Created by Aman Gupta on 18/10/23.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import Core
 
-class MovieOfflineInteractor: MovieInteractorType {
+class MovieCDOfflineInteractor: MovieInteractorType {
 
     func getMovieList(page: Int) -> AnyPublisher<MovieListResponse, NetworkError> {
         let movieList = CDMovieDetail.getList().map { MovieMetaData(detail: $0) }

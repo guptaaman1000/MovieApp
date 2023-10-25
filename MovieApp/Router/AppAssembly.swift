@@ -38,7 +38,10 @@ class AppAssembly: Assembly {
             guard let movieInteractor = resolver.resolve(MovieInteractorType.self, argument: type) else {
                 fatalError("Could not resolve Movie interactor")
             }
-            return MovieDetailViewModel(movieInteractor: movieInteractor, metaData: metaData)
+            guard let favouriteInteractor = resolver.resolve(FavouriteInteractorType.self) else {
+                fatalError("Could not resolve Favourite interactor")
+            }
+            return MovieDetailViewModel(movieInteractor: movieInteractor, favouriteInteractor: favouriteInteractor, metaData: metaData)
         }
         
         container.register(NetworkClientType.self) { _ in
@@ -50,8 +53,12 @@ class AppAssembly: Assembly {
                 guard let networkType = resolver.resolve(NetworkClientType.self) else { fatalError("Could not resolve Network client") }
                 return MovieNetworkInteractor(network: networkType)
             } else {
-                return MovieOfflineInteractor()
+                return MovieSDOfflineInteractor()
             }
+        }
+        
+        container.register(FavouriteInteractorType.self) { resolver in
+            FavouriteSDInteractor()
         }
     }
 }

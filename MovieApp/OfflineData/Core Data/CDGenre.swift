@@ -24,3 +24,5 @@ class CDGenre: NSManagedObject {
         return genreSet
     }
 }
+
+extension CDGenre: GenreType { }

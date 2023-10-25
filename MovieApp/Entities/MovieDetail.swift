@@ -60,7 +60,7 @@ struct MovieDetail: Decodable {
         runtime = try? values.decode(Int.self, forKey: .runtime)
     }
 
-    init(detail: CDMovieDetail) {
+    init(detail: any MovieDetailType) {
         self.overview = detail.overview
         self.releaseDate = detail.releaseDate
         self.id = Int(detail.id)
@@ -71,8 +71,8 @@ struct MovieDetail: Decodable {
         self.runtime = Int(detail.runtime)
         self.isFavourite = detail.isFavourite
         self.posterPath = detail.fullPath
-        self.genres = (detail.genres?.allObjects as? [CDGenre])?.map {Genre(detail: $0)}
-        self.spokenLanguages = (detail.spokenLanguages?.allObjects as? [CDLanguage])?.map {Language(detail: $0)}
+        self.genres = detail.genres?.map {Genre(detail: $0)}
+        self.spokenLanguages = detail.spokenLanguages?.map {Language(detail: $0)}
     }
 }
 
@@ -92,7 +92,7 @@ struct Genre: Decodable {
         name = try? values.decode(String.self, forKey: .name)
     }
 
-    init(detail: CDGenre) {
+    init(detail: GenreType) {
         self.id = Int(detail.id)
         self.name = detail.name
     }
@@ -114,7 +114,7 @@ struct Language: Decodable {
         name = try? values.decode(String.self, forKey: .name)
     }
 
-    init(detail: CDLanguage) {
+    init(detail: LanguageType) {
         self.isoCode = detail.isoCode ?? ""
         self.name = detail.name
     }
