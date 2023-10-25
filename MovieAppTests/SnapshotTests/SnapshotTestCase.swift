@@ -83,14 +83,18 @@ class SnapshotTestCase: FBSnapshotTestCase {
     func testMovieDetail_withoutFavourite() {
         
         given {
-            let interactor = MovieInteractorTypeMock()
+            let movieInteractor = MovieInteractorTypeMock()
+            let favouriteInteractor = FavouriteInteractorTypeMock()
             let mockMetaData: MovieMetaData = try XCTUnwrap(getDataFromJson())
-            let model = MovieDetailViewModel(movieInteractor: interactor, metaData: mockMetaData)
+            let model = MovieDetailViewModel(movieInteractor: movieInteractor,
+                                             favouriteInteractor: favouriteInteractor,
+                                             metaData: mockMetaData)
             let mockResponse: MovieDetail = try XCTUnwrap(getDataFromJson())
             let returnValue = Just(mockResponse)
                 .setFailureType(to: NetworkError.self)
                 .eraseToAnyPublisher()
-            interactor.given(.getMovieDetail(id: .any, willReturn: returnValue))
+            movieInteractor.given(.getMovieDetail(id: .any, willReturn: returnValue))
+            favouriteInteractor.given(.updateFavourite(detail: .any, willReturn: mockResponse))
             
             when {
                 let exp = expectation(description: "Loading movie detail")
@@ -114,14 +118,18 @@ class SnapshotTestCase: FBSnapshotTestCase {
     func testMovieDetail_withFavourite() {
         
         given {
-            let interactor = MovieInteractorTypeMock()
+            let movieInteractor = MovieInteractorTypeMock()
+            let favouriteInteractor = FavouriteInteractorTypeMock()
             let mockMetaData: MovieMetaData = try XCTUnwrap(getDataFromJson())
-            let model = MovieDetailViewModel(movieInteractor: interactor, metaData: mockMetaData)
+            let model = MovieDetailViewModel(movieInteractor: movieInteractor,
+                                             favouriteInteractor: favouriteInteractor,
+                                             metaData: mockMetaData)
             let mockResponse: MovieDetail = try XCTUnwrap(getDataFromJson())
             let returnValue = Just(mockResponse)
                 .setFailureType(to: NetworkError.self)
                 .eraseToAnyPublisher()
-            interactor.given(.getMovieDetail(id: .any, willReturn: returnValue))
+            movieInteractor.given(.getMovieDetail(id: .any, willReturn: returnValue))
+            favouriteInteractor.given(.updateFavourite(detail: .any, willReturn: mockResponse))
             
             when {
                 let exp = expectation(description: "Loading movie detail")

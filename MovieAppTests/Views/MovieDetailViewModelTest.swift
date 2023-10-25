@@ -14,17 +14,20 @@ import Core
 class MovieDetailViewModelTest: XCTestCase {
     
     private var model: MovieDetailViewModel!
-    private var interactor: MovieInteractorTypeMock!
+    private var movieInteractor: MovieInteractorTypeMock!
+    private var favouriteInteractor: FavouriteInteractorTypeMock!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        interactor = MovieInteractorTypeMock()
+        movieInteractor = MovieInteractorTypeMock()
+        favouriteInteractor = FavouriteInteractorTypeMock()
         let mockResponse: MovieMetaData = try XCTUnwrap(getDataFromJson())
-        model = MovieDetailViewModel(movieInteractor: interactor, metaData: mockResponse)
+        model = MovieDetailViewModel(movieInteractor: movieInteractor, favouriteInteractor: favouriteInteractor, metaData: mockResponse)
     }
     
     override func tearDown() {
-        interactor = nil
+        movieInteractor = nil
+        favouriteInteractor = nil
         model = nil
         super.tearDown()
     }
@@ -36,7 +39,8 @@ class MovieDetailViewModelTest: XCTestCase {
             let returnValue = Just(mockResponse)
                 .setFailureType(to: NetworkError.self)
                 .eraseToAnyPublisher()
-            interactor.given(.getMovieDetail(id: .any, willReturn: returnValue))
+            movieInteractor.given(.getMovieDetail(id: .any, willReturn: returnValue))
+            favouriteInteractor.given(.updateFavourite(detail: .any, willReturn: mockResponse))
             
             when {
                 let exp = expectation(description: "Loading movie details")
@@ -55,9 +59,11 @@ class MovieDetailViewModelTest: XCTestCase {
     func testFetchMovieDetail_failure() {
         
         given {
+            let mockResponse: MovieDetail = try XCTUnwrap(getDataFromJson())
             let returnValue = Fail<MovieDetail, NetworkError>(error: NetworkError.noContent)
                 .eraseToAnyPublisher()
-            interactor.given(.getMovieDetail(id: .any, willReturn: returnValue))
+            movieInteractor.given(.getMovieDetail(id: .any, willReturn: returnValue))
+            favouriteInteractor.given(.updateFavourite(detail: .any, willReturn: mockResponse))
             
             when {
                 let exp = expectation(description: "Loading movie details")
