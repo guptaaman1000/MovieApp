@@ -5,6 +5,7 @@ Movie App by Aman Gupta, mailto:// guptaaman1000@gmail.com
 - iOS deployment target - 17.0
 - Xcode 15.0
 - CocoaPods - 1.13.0 (https://cocoapods.org/)
+- Snapshot testing device - iPhone 15 Pro
 
 ## 3. Swift
 This project is build using Swift 5.
