@@ -45,9 +45,9 @@ struct MovieOptionsView: View {
     }
 }
 
-struct MovieOptionsView_Previews: PreviewProvider {
-    static var previews: some View {
-        let model = Application.shared.assembler.resolver.resolve(MovieOptionsViewModel.self)!
-        MovieOptionsView(viewModel: model)
-    }
-}
+//struct MovieOptionsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let model = Application.shared.assembler.resolver.resolve(MovieOptionsViewModel.self)!
+//        MovieOptionsView(viewModel: model)
+//    }
+//}

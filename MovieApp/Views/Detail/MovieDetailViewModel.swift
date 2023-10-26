@@ -31,7 +31,9 @@ import Combine
             
         } receiveValue: { [weak self] response in
             guard let self = self else { return }
-            self.dataSource = favouriteInteractor.updateFavourite(detail: response)
+            Task {
+                self.dataSource = await self.favouriteInteractor.updateFavourite(detail: response)
+            }
         }
     }
 

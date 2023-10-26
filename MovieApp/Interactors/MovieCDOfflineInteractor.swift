@@ -11,18 +11,39 @@ import Core
 
 class MovieCDOfflineInteractor: MovieInteractorType {
 
+    private let coreDataManager: CoreDataManager
+    
+    init(coreDataManager: CoreDataManager) {
+        self.coreDataManager = coreDataManager
+    }
+
     func getMovieList(page: Int) -> AnyPublisher<MovieListResponse, NetworkError> {
-        let movieList = CDMovieDetail.getList().map { MovieMetaData(detail: $0) }
-        let response = MovieListResponse(movieList: movieList)
-        return Just(response)
-            .setFailureType(to: NetworkError.self)
-            .eraseToAnyPublisher()
+        return Future<MovieListResponse, NetworkError> { promise in
+            Task {
+                let context = self.coreDataManager.mainManagedObjectContext
+                let result = await CDMovieDetail.all(in: context) as? [CDMovieDetail]
+                let movieList = result?.map { MovieMetaData(detail: $0) } ?? []
+                let response = MovieListResponse(movieList: movieList)
+                promise(.success(response))
+            }
+        }
+        .eraseToAnyPublisher()
     }
 
     func getMovieDetail(id: Int) -> AnyPublisher<MovieDetail, NetworkError> {
-        let movieDetail = CDMovieDetail.getDetail(id: id).map { MovieDetail(detail: $0) }
-        return Just(movieDetail!)
-            .setFailureType(to: NetworkError.self)
-            .eraseToAnyPublisher()
+        return Future<MovieDetail, NetworkError> { promise in
+            Task {
+                let context = self.coreDataManager.mainManagedObjectContext
+                let predicate = NSPredicate(format: "id=%d", id)
+                let result = await CDMovieDetail.where(predicate: predicate, in: context).first as? CDMovieDetail
+                let movieDetail = result.map { MovieDetail(detail: $0) }
+                if let movieDetail {
+                    promise(.success(movieDetail))
+                } else {
+                    promise(.failure(.failedToMapObject))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
     }
 }

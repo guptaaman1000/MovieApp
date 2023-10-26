@@ -10,6 +10,18 @@ import XCTest
 
 class MovieMetaDataTest: XCTestCase {
     
+    private var coreDataManager: CoreDataManager!
+    
+    override func setUp() {
+        super.setUp()
+        coreDataManager = CoreDataManager(dataModelName: "Movie", isStoredInMemoryOnly: true)
+    }
+    
+    override func tearDown() {
+        coreDataManager = nil
+        super.tearDown()
+    }
+
     func testMovieMetaData_initDecoder() {
         
         given {
@@ -27,7 +39,7 @@ class MovieMetaDataTest: XCTestCase {
     func testMovieMetaData_initDetail() {
         
         given {
-            let context = CoreDataManager.shared.newChildContext()
+            let context = coreDataManager.newChildContext()
             let cdMovie = CDMovieDetail(context: context)
             cdMovie.id = 100
             cdMovie.title = "Mission Impossible"

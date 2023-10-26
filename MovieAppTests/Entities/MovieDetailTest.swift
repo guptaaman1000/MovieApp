@@ -10,6 +10,18 @@ import XCTest
 
 class MovieDetailTest: XCTestCase {
     
+    private var coreDataManager: CoreDataManager!
+    
+    override func setUp() {
+        super.setUp()
+        coreDataManager = CoreDataManager(dataModelName: "Movie", isStoredInMemoryOnly: true)
+    }
+    
+    override func tearDown() {
+        coreDataManager = nil
+        super.tearDown()
+    }
+
     func testMovieDetail_initDecoder() {
         
         given {
@@ -27,7 +39,7 @@ class MovieDetailTest: XCTestCase {
     func testMovieDetail_initDetail() {
         
         given {
-            let context = CoreDataManager.shared.newChildContext()
+            let context = coreDataManager.newChildContext()
             let cdMovie = CDMovieDetail(context: context)
             cdMovie.id = 100
             cdMovie.title = "Mission Impossible"
@@ -46,7 +58,7 @@ class MovieDetailTest: XCTestCase {
     func testGenre_initDetail() {
         
         given {
-            let context = CoreDataManager.shared.newChildContext()
+            let context = coreDataManager.newChildContext()
             let cdGenre = CDGenre(context: context)
             cdGenre.id = 200
             cdGenre.name = "Comedy"
@@ -65,7 +77,7 @@ class MovieDetailTest: XCTestCase {
     func testLanguage_initDetail() {
         
         given {
-            let context = CoreDataManager.shared.newChildContext()
+            let context = coreDataManager.newChildContext()
             let cdLanguage = CDLanguage(context: context)
             cdLanguage.isoCode = "en_US"
             cdLanguage.name = "English"

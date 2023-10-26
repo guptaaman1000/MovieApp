@@ -9,17 +9,34 @@ import Foundation
 
 class FavouriteCDInteractor: FavouriteInteractorType {
     
+    private let coreDataManager: CoreDataManager
+    
+    init(coreDataManager: CoreDataManager) {
+        self.coreDataManager = coreDataManager
+    }
+
     func handleFavourite(detail: MovieDetail, metaData: MovieMetaData) {
-        if !detail.isFavourite && CDMovieDetail.getDetail(id: detail.id) != nil {
-            CDMovieDetail.delete(id: detail.id)
-        } else if detail.isFavourite && CDMovieDetail.getDetail(id: detail.id) == nil {
-            CDMovieDetail.add(detail, metaData)
+        
+        let mainContext = self.coreDataManager.mainManagedObjectContext
+        let childContext = self.coreDataManager.newChildContext()
+        let predicate = NSPredicate(format: "id=%d", detail.id)
+        let movieDetail = CDMovieDetail.where(predicate: predicate, in: mainContext).first
+        
+        if !detail.isFavourite && movieDetail != nil {
+            CDMovieDetail.deleteAllWhere(predicate: predicate, in: childContext)
+        } else if detail.isFavourite && movieDetail == nil {
+            CDMovieDetail.add(detail, metaData, in: childContext)
         }
+        
+        coreDataManager.save(childContext)
     }
     
-    func updateFavourite(detail: MovieDetail) -> MovieDetail {
+    func updateFavourite(detail: MovieDetail) async -> MovieDetail {
+        let context = self.coreDataManager.mainManagedObjectContext
+        let predicate = NSPredicate(format: "id=%d", detail.id)
+        let result = await CDMovieDetail.where(predicate: predicate, in: context).first != nil
         var finalResponse = detail
-        finalResponse.isFavourite = CDMovieDetail.getDetail(id: detail.id) != nil
+        finalResponse.isFavourite = result
         return finalResponse
     }
 }

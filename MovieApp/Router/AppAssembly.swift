@@ -17,6 +17,10 @@ class AppAssembly: Assembly {
             return AppRouter(resolver: resolver)
         }
 
+        container.register(CoreDataManager.self) { resolver in
+            return CoreDataManager(dataModelName: "Movie", isStoredInMemoryOnly: false)
+        }.inObjectScope(.container)
+        
         container.register(MovieOptionsViewModel.self) { resolver in
             guard let appRouter = resolver.resolve(AppRouterType.self) else {
                 fatalError("Could not resolve App router")
@@ -53,12 +57,14 @@ class AppAssembly: Assembly {
                 guard let networkType = resolver.resolve(NetworkClientType.self) else { fatalError("Could not resolve Network client") }
                 return MovieNetworkInteractor(network: networkType)
             } else {
-                return MovieSDOfflineInteractor()
+                guard let coreDataManager = resolver.resolve(CoreDataManager.self) else { fatalError("Could not resolve CoreDataManager") }
+                return MovieCDOfflineInteractor(coreDataManager: coreDataManager)
             }
         }
         
         container.register(FavouriteInteractorType.self) { resolver in
-            FavouriteSDInteractor()
+            guard let coreDataManager = resolver.resolve(CoreDataManager.self) else { fatalError("Could not resolve CoreDataManager") }
+            return FavouriteCDInteractor(coreDataManager: coreDataManager)
         }
     }
 }

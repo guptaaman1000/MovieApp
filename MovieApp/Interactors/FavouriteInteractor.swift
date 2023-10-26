@@ -10,5 +10,5 @@ import Foundation
 //sourcery: AutoMockable
 protocol FavouriteInteractorType: AnyObject {
     func handleFavourite(detail: MovieDetail, metaData: MovieMetaData)
-    func updateFavourite(detail: MovieDetail) -> MovieDetail
+    func updateFavourite(detail: MovieDetail) async -> MovieDetail
 }
