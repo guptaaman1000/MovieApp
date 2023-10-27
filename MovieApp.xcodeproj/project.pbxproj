@@ -33,7 +33,6 @@
 		4110428E2AE2959F009811B3 /* MovieMetaDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110428D2AE2959F009811B3 /* MovieMetaDataTest.swift */; };
 		411042902AE2979F009811B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4110428F2AE2979E009811B3 /* Utils.swift */; };
 		411042962AE2AEC9009811B3 /* SnapshotTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411042952AE2AEC9009811B3 /* SnapshotTestCase.swift */; };
-		4131763F2AEA519800E195D9 /* NSManagedObject+Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131763E2AEA519800E195D9 /* NSManagedObject+Record.swift */; };
 		416D37E22AE7A7BE0043538C /* CDLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416D37DC2AE7A7BD0043538C /* CDLanguage.swift */; };
 		416D37E32AE7A7BE0043538C /* Movie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 416D37DD2AE7A7BD0043538C /* Movie.xcdatamodeld */; };
 		416D37E42AE7A7BE0043538C /* CDMovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416D37DF2AE7A7BD0043538C /* CDMovieDetail.swift */; };
@@ -106,7 +105,6 @@
 		4110428D2AE2959F009811B3 /* MovieMetaDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieMetaDataTest.swift; sourceTree = "<group>"; };
 		4110428F2AE2979E009811B3 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		411042952AE2AEC9009811B3 /* SnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestCase.swift; sourceTree = "<group>"; };
-		4131763E2AEA519800E195D9 /* NSManagedObject+Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Record.swift"; sourceTree = "<group>"; };
 		416D37DC2AE7A7BD0043538C /* CDLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDLanguage.swift; sourceTree = "<group>"; };
 		416D37DE2AE7A7BD0043538C /* Movie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movie.xcdatamodel; sourceTree = "<group>"; };
 		416D37DF2AE7A7BD0043538C /* CDMovieDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDMovieDetail.swift; sourceTree = "<group>"; };
@@ -279,7 +277,6 @@
 				416D37DC2AE7A7BD0043538C /* CDLanguage.swift */,
 				416D37DF2AE7A7BD0043538C /* CDMovieDetail.swift */,
 				416D37E12AE7A7BD0043538C /* CoreDataManager.swift */,
-				4131763E2AEA519800E195D9 /* NSManagedObject+Record.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -686,7 +683,6 @@
 				416D37E82AE7A7EA0043538C /* SDGenre.swift in Sources */,
 				416D37E62AE7A7BE0043538C /* CoreDataManager.swift in Sources */,
 				416D37E52AE7A7BE0043538C /* CDGenre.swift in Sources */,
-				4131763F2AEA519800E195D9 /* NSManagedObject+Record.swift in Sources */,
 				416D37F02AE7D0930043538C /* OfflineEntityProtocols.swift in Sources */,
 				416D37E42AE7A7BE0043538C /* CDMovieDetail.swift in Sources */,
 				416D37EA2AE7A7F60043538C /* SDLanguage.swift in Sources */,

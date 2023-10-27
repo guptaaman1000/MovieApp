@@ -168,5 +168,73 @@ class CoreDataManager {
                 completion?(true)
             }
         }
-    }        
+    } 
+    
+    func getMatchingEntities<T: NSManagedObject>(
+        _ entity: T.Type,
+        with predicate: NSPredicate? = nil,
+        withSortDescriptors sortDescriptors: [NSSortDescriptor]? = nil,
+        in context: NSManagedObjectContext? = nil) async -> [T] {
+            
+            var fetchedArray: [T] = []
+            let context = context ?? mainManagedObjectContext
+            
+            await context.perform {
+                let fetchRequest = NSFetchRequest<T>(entityName: entity.name)
+                fetchRequest.predicate = predicate
+                fetchRequest.sortDescriptors = sortDescriptors
+                do {
+                    fetchedArray = try context.fetch(fetchRequest)
+                } catch {
+                    print("Unable to fetch entity - \(entity.name) and error - \(error)")
+                }
+            }
+            
+            return fetchedArray
+        }
+
+    func getMatchingEntities<T: NSManagedObject>(
+        _ entity: T.Type,
+        with predicate: NSPredicate? = nil,
+        withSortDescriptors sortDescriptors: [NSSortDescriptor]? = nil,
+        in context: NSManagedObjectContext? = nil) -> [T] {
+            
+            var fetchedArray: [T] = []
+            let context = context ?? mainManagedObjectContext
+            
+            autoreleasepool {
+                context.performAndWait {
+                    let fetchRequest = NSFetchRequest<T>(entityName: entity.name)
+                    fetchRequest.predicate = predicate
+                    fetchRequest.sortDescriptors = sortDescriptors
+                    do {
+                        fetchedArray = try context.fetch(fetchRequest)
+                    } catch {
+                        print("Unable to fetch entity - \(entity.name) and error - \(error)")
+                    }
+                }
+            }
+            
+            return fetchedArray
+        }
+    
+    func deleteEntities<T: NSManagedObject>(_ entity: T.Type, with predicate: NSPredicate? = nil, in context: NSManagedObjectContext) async {
+        await withTaskGroup(of: Void.self) {  group in
+            let list = self.getMatchingEntities(entity, with: predicate, in: context)
+            list.forEach { obj in
+                group.addTask {
+                    await context.perform {
+                        context.delete(obj)
+                    }
+                }
+            }
+        }
+    }
+
+    func deleteEntities<T: NSManagedObject>(_ entity: T.Type, with predicate: NSPredicate? = nil, in context: NSManagedObjectContext) {
+        context.performAndWait {
+            let list = self.getMatchingEntities(entity, with: predicate, in: context)
+            list.forEach(context.delete)
+        }
+    }
 }

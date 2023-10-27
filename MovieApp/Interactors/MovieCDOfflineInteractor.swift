@@ -20,9 +20,8 @@ class MovieCDOfflineInteractor: MovieInteractorType {
     func getMovieList(page: Int) -> AnyPublisher<MovieListResponse, NetworkError> {
         return Future<MovieListResponse, NetworkError> { promise in
             Task {
-                let context = self.coreDataManager.mainManagedObjectContext
-                let result = await CDMovieDetail.all(in: context) as? [CDMovieDetail]
-                let movieList = result?.map { MovieMetaData(detail: $0) } ?? []
+                let result = await self.coreDataManager.getMatchingEntities(CDMovieDetail.self)
+                let movieList = result.map { MovieMetaData(detail: $0) }
                 let response = MovieListResponse(movieList: movieList)
                 promise(.success(response))
             }
@@ -33,9 +32,8 @@ class MovieCDOfflineInteractor: MovieInteractorType {
     func getMovieDetail(id: Int) -> AnyPublisher<MovieDetail, NetworkError> {
         return Future<MovieDetail, NetworkError> { promise in
             Task {
-                let context = self.coreDataManager.mainManagedObjectContext
                 let predicate = NSPredicate(format: "id=%d", id)
-                let result = await CDMovieDetail.where(predicate: predicate, in: context).first as? CDMovieDetail
+                let result = await self.coreDataManager.getMatchingEntities(CDMovieDetail.self, with: predicate).first
                 let movieDetail = result.map { MovieDetail(detail: $0) }
                 if let movieDetail {
                     promise(.success(movieDetail))
