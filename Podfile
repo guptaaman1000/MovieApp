@@ -8,7 +8,6 @@ platform :ios, :deployment_target => '15.0'
 use_frameworks!
 
 def test_pods
-  pod 'SwiftyMocky', :inhibit_warnings => true
   pod 'iOSSnapshotTestCase'
 end
 

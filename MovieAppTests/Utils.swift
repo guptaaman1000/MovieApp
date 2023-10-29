@@ -49,3 +49,29 @@ func getDataFromJson<T: Decodable>() -> T? {
     }
     return response
 }
+
+enum Parameter<ValueType: Hashable>: Hashable {
+    
+    case value(ValueType)
+    case any
+    
+    static func == (lhs: Parameter<ValueType>, rhs: Parameter<ValueType>) -> Bool {
+        switch (lhs, rhs) {
+        case (let .value(data1), let .value(data2)):
+            return data1 == data2
+        case (.any, .any):
+            return true
+        default:
+            return false
+        }
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        switch self {
+        case let .value(data):
+            hasher.combine(data)
+        case .any:
+            hasher.combine(1)
+        }
+    }
+}

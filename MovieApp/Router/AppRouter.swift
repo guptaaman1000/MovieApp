@@ -8,7 +8,6 @@
 import Swinject
 import Foundation
 
-//sourcery: AutoMockable
 protocol AppRouterType {
     func displayMovieOptionsView() -> MovieOptionsView
     func displayMovieList(of type: MovieType) -> MovieListView

@@ -9,7 +9,6 @@ import Foundation
 import Combine
 import Core
 
-//sourcery: AutoMockable
 protocol MovieInteractorType: AnyObject {
     func getMovieList(page: Int) -> AnyPublisher<MovieListResponse, NetworkError>
     func getMovieDetail(id: Int) -> AnyPublisher<MovieDetail, NetworkError>
