@@ -6,7 +6,6 @@
 //
 
 import XCTest
-import SwiftyMocky
 import Combine
 import Core
 @testable import MovieApp
