@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class CDLanguage: NSManagedObject {
+final class CDLanguage: NSManagedObject {
 
     static func create(languages: [Language]?, context: NSManagedObjectContext) -> NSSet {
         let languageSet = NSSet()

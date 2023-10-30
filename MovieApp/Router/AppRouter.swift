@@ -8,15 +8,16 @@
 import Swinject
 import Foundation
 
+/// Router protocol to create various kind of Views
 protocol AppRouterType {
     func displayMovieOptionsView() -> MovieOptionsView
     func displayMovieList(of type: MovieType) -> MovieListView
     func displayMovieDetail(metaData: MovieMetaData, type: MovieType) -> MovieDetailView
 }
 
-class AppRouter: AppRouterType {
+final class AppRouter: AppRouterType {
     
-    let resolver: Resolver
+    private let resolver: Resolver
     
     init(resolver: Resolver) {
         self.resolver = resolver

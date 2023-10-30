@@ -7,7 +7,8 @@
 
 import Foundation
 
-class FavouriteCDHandler: FavouriteHandlerType {
+/// Handle favourites offline through Core Data
+final class FavouriteCDHandler: FavouriteHandlerType {
     
     private let coreDataManager: CoreDataManager
     

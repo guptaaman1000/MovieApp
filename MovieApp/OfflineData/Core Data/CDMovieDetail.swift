@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 import Core
 
-class CDMovieDetail: NSManagedObject {
+final class CDMovieDetail: NSManagedObject {
 
     static func add(_ detail: MovieDetail, _ metaData: MovieMetaData, in context: NSManagedObjectContext) {
         context.performAndWait {

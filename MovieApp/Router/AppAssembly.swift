@@ -9,8 +9,10 @@ import Foundation
 import Swinject
 import Core
 
-class AppAssembly: Assembly {
+final class AppAssembly: Assembly {
     
+    /// Register all the dependencies
+    /// - Parameter container: Container to be used for registration
     func assemble(container: Container) {
                 
         container.register(AppRouterType.self) { resolver in

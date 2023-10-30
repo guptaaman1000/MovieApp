@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import Core
 
+/// Protocol to fetch movie info
 protocol MovieHandlerType: AnyObject {
     func getMovieList(page: Int) -> AnyPublisher<MovieListResponse, NetworkError>
     func getMovieDetail(id: Int) -> AnyPublisher<MovieDetail, NetworkError>

@@ -9,7 +9,8 @@ import Foundation
 import Combine
 import Core
 
-class MovieCDOfflineHandler: MovieHandlerType {
+/// Fetch movies offline using Core Data
+final class MovieCDOfflineHandler: MovieHandlerType {
 
     private let coreDataManager: CoreDataManager
     

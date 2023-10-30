@@ -24,7 +24,6 @@ import Combine
     }
     
     func fetchMovieDetail() {
-             
         subscription = movieHandler.getMovieDetail(id: metaData.id)
             .receive(on: DispatchQueue.main)
             .sink { _ in

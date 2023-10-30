@@ -9,7 +9,8 @@ import Foundation
 import Combine
 import Core
 
-class MovieSDOfflineHandler: MovieHandlerType {
+/// Fetch movies offline using Swift Data
+final class MovieSDOfflineHandler: MovieHandlerType {
 
     func getMovieList(page: Int) -> AnyPublisher<MovieListResponse, NetworkError> {
         return Future<MovieListResponse, Never> { promise in

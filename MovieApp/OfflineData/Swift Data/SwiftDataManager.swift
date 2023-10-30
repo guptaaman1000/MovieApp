@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-class SwiftDataManager {
+final class SwiftDataManager {
     
     static let shared = SwiftDataManager()
     
@@ -25,13 +25,15 @@ class SwiftDataManager {
         }
     }()
     
-    @MainActor
-    var mainContext: ModelContext {
+    /// The main  context associated with the model container.
+    @MainActor var mainContext: ModelContext {
         modelContainer.mainContext
     }
     
     private init() { }
     
+    /// Creates a new custom context.
+    /// - Returns: New custom context
     func newContext() -> ModelContext {
         ModelContext(modelContainer)
     }

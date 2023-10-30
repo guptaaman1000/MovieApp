@@ -9,7 +9,8 @@ import Foundation
 import Combine
 import Core
 
-class MovieNetworkHandler: MovieHandlerType {
+/// Fetch movies from backend server
+final class MovieNetworkHandler: MovieHandlerType {
     
     private let network : NetworkClientType
     

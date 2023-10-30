@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class CDGenre: NSManagedObject {
+final class CDGenre: NSManagedObject {
 
     static func create(genres: [Genre]?, context: NSManagedObjectContext) -> NSSet {
         let genreSet = NSSet()

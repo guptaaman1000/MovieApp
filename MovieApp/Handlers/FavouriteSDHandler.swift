@@ -7,7 +7,8 @@
 
 import Foundation
 
-class FavouriteSDHandler: FavouriteHandlerType {
+/// Handle favourites offline through Swift Data
+final class FavouriteSDHandler: FavouriteHandlerType {
     
     @MainActor func handleFavourite(detail: MovieDetail, metaData: MovieMetaData) {
         let movieDetail = SDMovieDetail.getDetail(id: detail.id)
