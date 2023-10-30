@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CachedAsyncImage
+import Core
 
 struct MovieDetailView: View {
     

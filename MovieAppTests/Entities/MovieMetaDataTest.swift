@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Core
 @testable import MovieApp
 
 class MovieMetaDataTest: XCTestCase {

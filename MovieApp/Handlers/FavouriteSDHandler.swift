@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Core
 
 /// Handle favourites offline through Swift Data
 final class FavouriteSDHandler: FavouriteHandlerType {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Core
 
 /// Handle favourites offline through Core Data
 final class FavouriteCDHandler: FavouriteHandlerType {
