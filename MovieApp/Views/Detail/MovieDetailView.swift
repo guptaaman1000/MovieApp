@@ -58,11 +58,12 @@ struct MovieDetailView: View {
     }
 }
 
-//#Preview {
-//    let context = CoreDataManager.shared.newChildContext()
-//    let cdMovie = CDMovieDetail(context: context)
-//    cdMovie.id = 299054
-//    let metaData = MovieMetaData(detail: cdMovie)
-//    let model = Application.shared.assembler.resolver.resolve(MovieDetailViewModel.self, arguments: metaData, MovieType.online)!
-//    return MovieDetailView(viewModel: model)
-//}
+#Preview {
+    let cdManager = Application.shared.assembler.resolver.resolve(CoreDataManager.self)!
+    let context = cdManager.newChildContext()
+    let cdMovie = CDMovieDetail(context: context)
+    cdMovie.id = 299054
+    let metaData = MovieMetaData(detail: cdMovie)
+    let model = Application.shared.assembler.resolver.resolve(MovieDetailViewModel.self, arguments: metaData, MovieType.online)!
+    return MovieDetailView(viewModel: model)
+}

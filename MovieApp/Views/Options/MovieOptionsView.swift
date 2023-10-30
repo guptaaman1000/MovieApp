@@ -21,19 +21,15 @@ struct MovieOptionsView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 CustomTabBar(selectedTab: $selectedTab, tab1: "Now Playing", tab2: "Favourite")
-                
+    
                 TabView(selection: $selectedTab) {
                     NavigationStack {
                         viewModel.getMovieListView(type: .online)
-                            .foregroundColor(.white)
-                            .navigationBarHidden(true)
                     }
                     .tag(0)
                     
                     NavigationStack {
                         viewModel.getMovieListView(type: .offline)
-                            .foregroundColor(.white)
-                            .navigationBarHidden(true)
                     }
                     .tag(1)
                 }
@@ -45,9 +41,7 @@ struct MovieOptionsView: View {
     }
 }
 
-//struct MovieOptionsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let model = Application.shared.assembler.resolver.resolve(MovieOptionsViewModel.self)!
-//        MovieOptionsView(viewModel: model)
-//    }
-//}
+#Preview {
+    let model = Application.shared.assembler.resolver.resolve(MovieOptionsViewModel.self)!
+    return MovieOptionsView(viewModel: model)
+}
