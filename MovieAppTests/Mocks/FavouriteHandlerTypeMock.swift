@@ -1,5 +1,5 @@
 //
-//  FavouriteInteractorTypeMock.swift
+//  FavouriteHandlerTypeMock.swift
 //  MovieAppTests
 //
 //  Created by Aman Gupta on 29/10/23.
@@ -19,7 +19,7 @@ extension MovieDetail: Hashable {
     }
 }
 
-class FavouriteInteractorTypeMock: FavouriteInteractorType {
+class FavouriteHandlerTypeMock: FavouriteHandlerType {
     
     enum MethodType: Hashable {
         

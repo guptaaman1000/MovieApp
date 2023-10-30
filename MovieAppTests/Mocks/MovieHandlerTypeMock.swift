@@ -1,5 +1,5 @@
 //
-//  MovieInteractorTypeMock.swift
+//  MovieHandlerTypeMock.swift
 //  MovieAppTests
 //
 //  Created by Aman Gupta on 29/10/23.
@@ -10,7 +10,7 @@ import Combine
 import Core
 @testable import MovieApp
 
-class MovieInteractorTypeMock: MovieInteractorType {
+class MovieHandlerTypeMock: MovieHandlerType {
 
     enum MethodType: Hashable {
         

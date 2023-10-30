@@ -1,5 +1,5 @@
 //
-//  FavouriteSDInteractor.swift
+//  FavouriteSDHandler.swift
 //  MovieApp
 //
 //  Created by Aman Gupta on 25/10/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FavouriteSDInteractor: FavouriteInteractorType {
+class FavouriteSDHandler: FavouriteHandlerType {
     
     @MainActor func handleFavourite(detail: MovieDetail, metaData: MovieMetaData) {
         let movieDetail = SDMovieDetail.getDetail(id: detail.id)

@@ -10,7 +10,7 @@ import Combine
 
 @Observable class MovieListViewModel {
 
-    private let movieInteractor: MovieInteractorType
+    private let movieHandler: MovieHandlerType
     private let appRouter: AppRouterType
     private var subscription: AnyCancellable?
     private var currentPage = 0
@@ -19,14 +19,14 @@ import Combine
     var dataSource = [MovieMetaData]()
     let movieType: MovieType
 
-    init(movieInteractor: MovieInteractorType, appRouter: AppRouterType, movieType: MovieType) {
-        self.movieInteractor = movieInteractor
+    init(movieHandler: MovieHandlerType, appRouter: AppRouterType, movieType: MovieType) {
+        self.movieHandler = movieHandler
         self.appRouter = appRouter
         self.movieType = movieType
     }
     
     func fetchMovies() {
-        subscription = movieInteractor.getMovieList(page: currentPage + 1)
+        subscription = movieHandler.getMovieList(page: currentPage + 1)
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 

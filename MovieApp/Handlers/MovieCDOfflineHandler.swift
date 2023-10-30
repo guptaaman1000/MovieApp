@@ -1,5 +1,5 @@
 //
-//  MovieCDOfflineInteractor.swift
+//  MovieCDOfflineHandler.swift
 //  MovieApp
 //
 //  Created by Aman Gupta on 18/10/23.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import Core
 
-class MovieCDOfflineInteractor: MovieInteractorType {
+class MovieCDOfflineHandler: MovieHandlerType {
 
     private let coreDataManager: CoreDataManager
     

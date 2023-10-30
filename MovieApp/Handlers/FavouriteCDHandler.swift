@@ -1,5 +1,5 @@
 //
-//  FavouriteCDInteractor.swift
+//  FavouriteCDHandler.swift
 //  MovieApp
 //
 //  Created by Aman Gupta on 25/10/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FavouriteCDInteractor: FavouriteInteractorType {
+class FavouriteCDHandler: FavouriteHandlerType {
     
     private let coreDataManager: CoreDataManager
     

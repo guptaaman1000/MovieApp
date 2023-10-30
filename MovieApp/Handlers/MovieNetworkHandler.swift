@@ -1,5 +1,5 @@
 //
-//  MovieNetworkInteractor.swift
+//  MovieNetworkHandler.swift
 //  MovieApp
 //
 //  Created by Aman Gupta on 18/10/23.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import Core
 
-class MovieNetworkInteractor: MovieInteractorType {
+class MovieNetworkHandler: MovieHandlerType {
     
     private let network : NetworkClientType
     

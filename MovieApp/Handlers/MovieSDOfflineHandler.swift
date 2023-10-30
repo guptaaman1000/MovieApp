@@ -1,5 +1,5 @@
 //
-//  MovieSDOfflineInteractor.swift
+//  MovieSDOfflineHandler.swift
 //  MovieApp
 //
 //  Created by Aman Gupta on 24/10/23.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import Core
 
-class MovieSDOfflineInteractor: MovieInteractorType {
+class MovieSDOfflineHandler: MovieHandlerType {
 
     func getMovieList(page: Int) -> AnyPublisher<MovieListResponse, NetworkError> {
         return Future<MovieListResponse, Never> { promise in

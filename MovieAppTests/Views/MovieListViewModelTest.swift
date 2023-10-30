@@ -14,17 +14,17 @@ class MovieListViewModelTest: XCTestCase {
     
     private var model: MovieListViewModel!
     private var router : AppRouterTypeMock!
-    private var interactor: MovieInteractorTypeMock!
+    private var handler: MovieHandlerTypeMock!
     
     override func setUp() {
         super.setUp()
         router = AppRouterTypeMock()
-        interactor = MovieInteractorTypeMock()
-        model = MovieListViewModel(movieInteractor: interactor, appRouter: router, movieType: .online)
+        handler = MovieHandlerTypeMock()
+        model = MovieListViewModel(movieHandler: handler, appRouter: router, movieType: .online)
     }
     
     override func tearDown() {
-        interactor = nil
+        handler = nil
         router = nil
         model = nil
         super.tearDown()
@@ -37,7 +37,7 @@ class MovieListViewModelTest: XCTestCase {
             let returnValue = Just(mockResponse)
                 .setFailureType(to: NetworkError.self)
                 .eraseToAnyPublisher()
-            interactor.given(.getMovieList(page: .any, willReturn: returnValue))
+            handler.given(.getMovieList(page: .any, willReturn: returnValue))
             
             when {
                 let exp = expectation(description: "Loading movies")
@@ -58,7 +58,7 @@ class MovieListViewModelTest: XCTestCase {
         given {
             let returnValue = Fail<MovieListResponse, NetworkError>(error: NetworkError.noContent)
                 .eraseToAnyPublisher()
-            interactor.given(.getMovieList(page: .any, willReturn: returnValue))
+            handler.given(.getMovieList(page: .any, willReturn: returnValue))
             
             when {
                 let exp = expectation(description: "Loading movies")

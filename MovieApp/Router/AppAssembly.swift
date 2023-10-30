@@ -29,42 +29,42 @@ class AppAssembly: Assembly {
         }
         
         container.register(MovieListViewModel.self) { (resolver, type: MovieType) in
-            guard let movieInteractor = resolver.resolve(MovieInteractorType.self, argument: type) else {
-                fatalError("Could not resolve Movie interactor")
+            guard let movieHandler = resolver.resolve(MovieHandlerType.self, argument: type) else {
+                fatalError("Could not resolve Movie handler")
             }
             guard let appRouter = resolver.resolve(AppRouterType.self) else {
                 fatalError("Could not resolve App router")
             }
-            return MovieListViewModel(movieInteractor: movieInteractor, appRouter: appRouter, movieType: type)
+            return MovieListViewModel(movieHandler: movieHandler, appRouter: appRouter, movieType: type)
         }
         
         container.register(MovieDetailViewModel.self) { (resolver, metaData: MovieMetaData, type: MovieType) in
-            guard let movieInteractor = resolver.resolve(MovieInteractorType.self, argument: type) else {
-                fatalError("Could not resolve Movie interactor")
+            guard let movieHandler = resolver.resolve(MovieHandlerType.self, argument: type) else {
+                fatalError("Could not resolve Movie handler")
             }
-            guard let favouriteInteractor = resolver.resolve(FavouriteInteractorType.self) else {
-                fatalError("Could not resolve Favourite interactor")
+            guard let favouriteHandler = resolver.resolve(FavouriteHandlerType.self) else {
+                fatalError("Could not resolve Favourite handler")
             }
-            return MovieDetailViewModel(movieInteractor: movieInteractor, favouriteInteractor: favouriteInteractor, metaData: metaData)
+            return MovieDetailViewModel(movieHandler: movieHandler, favouriteHandler: favouriteHandler, metaData: metaData)
         }
         
         container.register(NetworkClientType.self) { _ in
             RESTNetworkClient()
         }
 
-        container.register(MovieInteractorType.self) { (resolver, type: MovieType) in
+        container.register(MovieHandlerType.self) { (resolver, type: MovieType) in
             if type == .online {
                 guard let networkType = resolver.resolve(NetworkClientType.self) else { fatalError("Could not resolve Network client") }
-                return MovieNetworkInteractor(network: networkType)
+                return MovieNetworkHandler(network: networkType)
             } else {
                 guard let coreDataManager = resolver.resolve(CoreDataManager.self) else { fatalError("Could not resolve CoreDataManager") }
-                return MovieCDOfflineInteractor(coreDataManager: coreDataManager)
+                return MovieCDOfflineHandler(coreDataManager: coreDataManager)
             }
         }
         
-        container.register(FavouriteInteractorType.self) { resolver in
+        container.register(FavouriteHandlerType.self) { resolver in
             guard let coreDataManager = resolver.resolve(CoreDataManager.self) else { fatalError("Could not resolve CoreDataManager") }
-            return FavouriteCDInteractor(coreDataManager: coreDataManager)
+            return FavouriteCDHandler(coreDataManager: coreDataManager)
         }
     }
 }
