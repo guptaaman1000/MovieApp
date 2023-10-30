@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import FBSnapshotTestCase
+import iOSSnapshotTestCase
 import SwiftUI
 import Combine
 import Core

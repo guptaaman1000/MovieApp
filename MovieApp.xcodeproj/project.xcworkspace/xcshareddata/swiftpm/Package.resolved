@@ -10,6 +10,33 @@
       }
     },
     {
+      "identity" : "core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/guptaaman1000/Core",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f48e276e91888fd4ca40a81b46705a2de006dc80"
+      }
+    },
+    {
+      "identity" : "ios-snapshot-test-case",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/uber/ios-snapshot-test-case.git",
+      "state" : {
+        "revision" : "7b10770333a961be6e5a41c9ce04b8c6d3990126",
+        "version" : "8.0.0"
+      }
+    },
+    {
+      "identity" : "sharedcomponents",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/guptaaman1000/SharedComponents",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2755ceff08bba225553e7217702493e6992f9d19"
+      }
+    },
+    {
       "identity" : "swinject",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Swinject/Swinject.git",
