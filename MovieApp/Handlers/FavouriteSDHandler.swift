@@ -10,18 +10,34 @@ import Foundation
 /// Handle favourites offline through Swift Data
 final class FavouriteSDHandler: FavouriteHandlerType {
     
+    private let swiftDataManager: SwiftDataManager
+    
+    init(swiftDataManager: SwiftDataManager) {
+        self.swiftDataManager = swiftDataManager
+    }
+
     @MainActor func handleFavourite(detail: MovieDetail, metaData: MovieMetaData) {
-        let movieDetail = SDMovieDetail.getDetail(id: detail.id)
+        
+        let id = Int32(detail.id)
+        let childContext = swiftDataManager.newContext()
+        let predicate = #Predicate<SDMovieDetail> { $0.id == id }
+        let movieDetail = swiftDataManager.getMatchingEntities(SDMovieDetail.self, with: predicate).first
+
         if !detail.isFavourite && movieDetail != nil {
-            SDMovieDetail.delete(id: detail.id)
+            swiftDataManager.deleteEntities(SDMovieDetail.self, with: predicate, in: childContext)
         } else if detail.isFavourite && movieDetail == nil {
-            SDMovieDetail.add(detail, metaData)
+            SDMovieDetail.add(detail, metaData, in: childContext)
         }
+        
+        swiftDataManager.save(childContext)
     }
     
     @MainActor func updateFavourite(detail: MovieDetail) -> MovieDetail {
+        let id = Int32(detail.id)
+        let predicate = #Predicate<SDMovieDetail> { $0.id == id }
+        let result = swiftDataManager.getMatchingEntities(SDMovieDetail.self, with: predicate).first != nil
         var finalResponse = detail
-        finalResponse.isFavourite = SDMovieDetail.getDetail(id: detail.id) != nil
+        finalResponse.isFavourite = result
         return finalResponse
     }
 }

@@ -23,6 +23,12 @@ final class AppAssembly: Assembly {
             return CoreDataManager(dataModelName: "Movie", isStoredInMemoryOnly: false)
         }.inObjectScope(.container)
         
+        container.register(SwiftDataManager.self) { resolver in
+            return SwiftDataManager(supportedEntities: [
+                SDGenre.self, SDLanguage.self, SDMovieDetail.self
+            ], isStoredInMemoryOnly: false)
+        }.inObjectScope(.container)
+
         container.register(MovieOptionsViewModel.self) { resolver in
             guard let appRouter = resolver.resolve(AppRouterType.self) else {
                 fatalError("Could not resolve App router")
@@ -59,14 +65,18 @@ final class AppAssembly: Assembly {
                 guard let networkType = resolver.resolve(NetworkClientType.self) else { fatalError("Could not resolve Network client") }
                 return MovieNetworkHandler(network: networkType)
             } else {
-                guard let coreDataManager = resolver.resolve(CoreDataManager.self) else { fatalError("Could not resolve CoreDataManager") }
-                return MovieCDOfflineHandler(coreDataManager: coreDataManager)
+                guard let dataManager = resolver.resolve(CoreDataManager.self) else { fatalError("Could not resolve CoreDataManager") }
+                return MovieCDOfflineHandler(coreDataManager: dataManager)
+//                guard let dataManager = resolver.resolve(SwiftDataManager.self) else { fatalError("Could not resolve SwiftDataManager") }
+//                return MovieSDOfflineHandler(swiftDataManager: dataManager)
             }
         }
         
         container.register(FavouriteHandlerType.self) { resolver in
-            guard let coreDataManager = resolver.resolve(CoreDataManager.self) else { fatalError("Could not resolve CoreDataManager") }
-            return FavouriteCDHandler(coreDataManager: coreDataManager)
+            guard let dataManager = resolver.resolve(CoreDataManager.self) else { fatalError("Could not resolve CoreDataManager") }
+            return FavouriteCDHandler(coreDataManager: dataManager)
+//            guard let dataManager = resolver.resolve(SwiftDataManager.self) else { fatalError("Could not resolve SwiftDataManager") }
+//            return FavouriteSDHandler(swiftDataManager: dataManager)
         }
     }
 }
