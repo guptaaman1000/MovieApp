@@ -8,12 +8,6 @@
 import XCTest
 @testable import MovieApp
 
-extension MovieMetaData: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
-
 class AppRouterTypeMock: AppRouterType {
     
     enum MethodType: Hashable {

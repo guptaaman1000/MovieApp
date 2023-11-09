@@ -27,7 +27,8 @@ struct MovieListView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: items, spacing: 10) {
-                ForEach(viewModel.dataSource) { item in
+                ForEach(viewModel.dataSource.indices, id:\.self) { index in
+                    let item = viewModel.dataSource[index]
                     NavigationLink {
                         NavigationLazyView(viewModel.getMovieDetailView(item: item))
                     } label: {

@@ -44,6 +44,14 @@ class MovieDetailTest: XCTestCase {
             let cdMovie = CDMovieDetail(context: context)
             cdMovie.id = 100
             cdMovie.title = "Mission Impossible"
+            let cdGenre = CDGenre(context: context)
+            cdGenre.id = 200
+            cdGenre.name = "Comedy"
+            let cdLanguage = CDLanguage(context: context)
+            cdLanguage.isoCode = "en_US"
+            cdLanguage.name = "English"
+            cdMovie.genresSet = NSSet(array: [cdGenre])
+            cdMovie.spokenLanguagesSet = NSSet(array: [cdLanguage])
             
             when {
                 let result = MovieDetail(detail: cdMovie)
@@ -75,7 +83,7 @@ class MovieDetailTest: XCTestCase {
         }
     }
     
-    func testLanguage_initDetail() {
+    func testLanguage_initDetail_isoCodeNotNil() {
         
         given {
             let context = coreDataManager.newChildContext()
@@ -88,6 +96,24 @@ class MovieDetailTest: XCTestCase {
                 
                 then {
                     XCTAssertEqual(result.isoCode, "en_US")
+                    XCTAssertEqual(result.name, "English")
+                }
+            }
+        }
+    }
+    
+    func testLanguage_initDetail_isoCodeNil() {
+        
+        given {
+            let context = coreDataManager.newChildContext()
+            let cdLanguage = CDLanguage(context: context)
+            cdLanguage.name = "English"
+            
+            when {
+                let result = Language(detail: cdLanguage)
+                
+                then {
+                    XCTAssertEqual(result.isoCode, "")
                     XCTAssertEqual(result.name, "English")
                 }
             }

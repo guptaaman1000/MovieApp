@@ -31,16 +31,20 @@ final class MovieSDOfflineHandler: MovieHandlerType {
     }
 
     func getMovieDetail(id: Int) -> AnyPublisher<MovieDetail, NetworkError> {
-        return Future<MovieDetail, Never> { promise in
+        return Future<MovieDetail, NetworkError> { promise in
             Task {
                 let id = Int32(id)
                 let predicate = #Predicate<SDMovieDetail> { $0.id == id }
                 let result = await self.swiftDataManager.getMatchingEntities(SDMovieDetail.self, with: predicate).first
                 let movieDetail = result.map { MovieDetail(detail: $0) }
-                promise(.success(movieDetail!))
+                if let movieDetail {
+                    promise(.success(movieDetail))
+                } else {
+                    promise(.failure(.failedToMapObject))
+                }
+
             }
         }
-        .setFailureType(to: NetworkError.self)
         .eraseToAnyPublisher()
     }    
 }

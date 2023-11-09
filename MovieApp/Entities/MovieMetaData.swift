@@ -8,7 +8,7 @@
 import Foundation
 import Core
 
-struct MovieMetaData: Decodable, Identifiable, Equatable {
+struct MovieMetaData: Decodable, Hashable {
     
     let posterPath: String?
     let id: Int
