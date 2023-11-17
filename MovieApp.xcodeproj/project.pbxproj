@@ -126,6 +126,7 @@
 		416D37EB2AE7A8010043538C /* SDMovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDMovieDetail.swift; sourceTree = "<group>"; };
 		416D37EF2AE7D0930043538C /* OfflineEntityProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineEntityProtocols.swift; sourceTree = "<group>"; };
 		416FB09C2AE10B5000BA83E3 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		41AF3C4D2B07746D002761A0 /* MovieApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MovieApp.xctestplan; sourceTree = "<group>"; };
 		41D047172AFC79BF00245DB9 /* MovieSDOfflineHandlerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSDOfflineHandlerTest.swift; sourceTree = "<group>"; };
 		41D047192AFC835A00245DB9 /* FavouriteSDHandlerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteSDHandlerTest.swift; sourceTree = "<group>"; };
 		41D0471B2AFC946200245DB9 /* MovieCDOfflineHandlerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCDOfflineHandlerTest.swift; sourceTree = "<group>"; };
@@ -314,6 +315,7 @@
 		41D7C78E2ADFC80D003CC771 = {
 			isa = PBXGroup;
 			children = (
+				41AF3C4D2B07746D002761A0 /* MovieApp.xctestplan */,
 				41D7C7992ADFC80D003CC771 /* MovieApp */,
 				41D7C7AA2ADFC810003CC771 /* MovieAppTests */,
 				41D7C7B42ADFC810003CC771 /* MovieAppUITests */,

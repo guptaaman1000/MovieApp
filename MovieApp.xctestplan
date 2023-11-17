@@ -1,0 +1,56 @@
+{
+  "configurations" : [
+    {
+      "id" : "2C79F159-D1F5-4FBF-A747-55C45BC04FE6",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:MovieApp.xcodeproj",
+          "identifier" : "41D7C7962ADFC80D003CC771",
+          "name" : "MovieApp"
+        }
+      ]
+    },
+    "environmentVariableEntries" : [
+      {
+        "key" : "FB_REFERENCE_IMAGE_DIR",
+        "value" : "$(SOURCE_ROOT)\/$(PROJECT_NAME)Tests\/ReferenceImages"
+      },
+      {
+        "key" : "IMAGE_DIFF_DIR",
+        "value" : "$(SOURCE_ROOT)\/$(PROJECT_NAME)Tests\/FailureDiffs"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:MovieApp.xcodeproj",
+      "identifier" : "41D7C7962ADFC80D003CC771",
+      "name" : "MovieApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MovieApp.xcodeproj",
+        "identifier" : "41D7C7A62ADFC810003CC771",
+        "name" : "MovieAppTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MovieApp.xcodeproj",
+        "identifier" : "41D7C7B02ADFC810003CC771",
+        "name" : "MovieAppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
